@@ -16,10 +16,6 @@
   .small-circle {
     @apply h-[40px] w-[40px] rounded-full absolute;
   }
-
-  .img-container {
-    @apply h-[100vh] flex justify-center items-center text-[48px];
-  }
 }
 
 .word {
