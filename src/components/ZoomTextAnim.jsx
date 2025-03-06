@@ -69,7 +69,7 @@ export default function ZoomTextAnim() {
             onStart: () => {
               if (i > 0) {
                 const cont = document.querySelector(".images-container");
-                cont.style.overflow = "visible";
+                cont.classList.add("active");
                 gsap.timeline().to(
                   ".img-container",
                   {

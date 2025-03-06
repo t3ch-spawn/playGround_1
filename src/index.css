@@ -23,6 +23,10 @@
   vertical-align: bottom;
 }
 
+.images-container.active {
+  overflow: visible;
+}
+
 @media (max-width: 800px) {
   .zoom-images {
     height: 500px;
