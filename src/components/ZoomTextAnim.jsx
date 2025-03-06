@@ -69,7 +69,7 @@ export default function ZoomTextAnim() {
             onStart: () => {
               if (i > 0) {
                 const cont = document.querySelector(".images-container");
-                cont.style.overflow = "visible";
+                // cont.style.overflow = "visible";
                 gsap.timeline().to(
                   ".img-container",
                   {
@@ -149,8 +149,8 @@ export default function ZoomTextAnim() {
         </div>
       </div>
 
-      <div className=" relative images-container overflow-hidden h-[100vh] ">
-        <div className=" flex justify-center items-center fixed w-[100vw] h-[100vh] inset-0 overflow-hidden">
+      <div className=" relative images-container  h-[100vh] ">
+        <div className=" flex justify-center items-center fixed w-[100vw] h-[100vh] inset-0 ">
           {pictures.map((pic, idx) => {
             return (
               <div
