@@ -68,29 +68,26 @@ export default function ZoomTextAnim() {
             ease: "power4.inOut",
             onStart: () => {
               if (i > 0) {
-                gsap
-                  .timeline()
-                  .to(".images-container", {
-                    overflow: "visible",
-                    delay: 0.5,
-                  })
-                  .to(
-                    ".img-container",
-                    {
-                      //   display: "block",
-                      scale: 1,
-                      transformOrigin: "center",
-                      duration: 1.5,
-                      ease: "power2.inOut",
-                      onStart: () => {
-                        gsap.to(".zoom-images", {
-                          opacity: 1,
-                          duration: 0,
-                        });
-                      },
+                const cont = document.querySelector(".images-container");
+                cont.style.overflow = "visible";
+                gsap.timeline().to(
+                  ".img-container",
+                  {
+                    //   display: "block",
+                    scale: 1,
+                    delay: 1,
+                    transformOrigin: "center",
+                    duration: 1.5,
+                    ease: "power2.inOut",
+                    onStart: () => {
+                      gsap.to(".zoom-images", {
+                        opacity: 1,
+                        duration: 0,
+                      });
                     },
-                    "<"
-                  );
+                  },
+                  "<"
+                );
               }
             },
           },
@@ -116,7 +113,7 @@ export default function ZoomTextAnim() {
           trigger: allHeights[idx],
           scrub: 2,
           end: "bottom bottom",
-          start: idx === 0 ? "-120% bottom" : "-30% bottom",
+          start: idx === 0 ? "-150% bottom" : "-60% bottom",
         },
       });
     });
@@ -177,7 +174,7 @@ export default function ZoomTextAnim() {
         {pictures.map((pic, idx) => {
           return (
             <div
-              style={{ height: `${innerHeight * 2.1}px` }}
+              style={{ height: `${innerHeight * 2.8}px` }}
               className=" w-[100%] white-height"
             ></div>
           );
