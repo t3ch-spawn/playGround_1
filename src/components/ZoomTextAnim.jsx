@@ -29,7 +29,7 @@ export default function ZoomTextAnim() {
 
     const split = new SplitType(".split", { types: "words,chars" });
 
-    const allContainers = document.querySelectorAll(".zoom-images");
+    const allImages = document.querySelectorAll(".zoom-images");
     const allTextContainers = document.querySelectorAll(".text-container");
 
     loaderTimeline.current = gsap.timeline();
@@ -38,15 +38,14 @@ export default function ZoomTextAnim() {
     // });
 
     const splitNames = document.querySelectorAll(".split-name .char");
-    const descrip = document.querySelector(".split-descrip");
 
     splitNames.forEach((char) => {
       gsap.set(char, { y: 100 });
     });
 
+    // Animation for animating the text in and zooming them out
     for (let i = 0; i < 2; i++) {
       const container = allTextContainers[i];
-      console.log(container);
       loaderTimeline.current
         .to(
           i > 0
@@ -67,6 +66,33 @@ export default function ZoomTextAnim() {
             scale: 800,
             duration: 3.5,
             ease: "power4.inOut",
+            onStart: () => {
+              if (i > 0) {
+                gsap
+                  .timeline()
+                  .to(".images-container", {
+                    overflow: "visible",
+                    delay: 0.5,
+                  })
+                  .to(
+                    ".img-container",
+                    {
+                      //   display: "block",
+                      scale: 1,
+                      transformOrigin: "center",
+                      duration: 1.5,
+                      ease: "power2.inOut",
+                      onStart: () => {
+                        gsap.to(".zoom-images", {
+                          opacity: 1,
+                          duration: 0,
+                        });
+                      },
+                    },
+                    "<"
+                  );
+              }
+            },
           },
           ">"
         );
@@ -74,12 +100,13 @@ export default function ZoomTextAnim() {
 
     const allHeights = document.querySelectorAll(".white-height");
 
-    allContainers.forEach((pic, idx) => {
+    allImages.forEach((pic, idx) => {
       gsap.to(pic, {
         scale: 1.7,
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: allHeights[idx],
+
           scrub: 2,
           end: "bottom bottom",
           start: "-250% top",
@@ -124,7 +151,7 @@ export default function ZoomTextAnim() {
       </div> */}
 
       {/* Loader container */}
-      <div className="h-[100vh] absolute inset-0 w-[100vw] flex justify-center items-center text-[48px] overflow-hidden hidden">
+      <div className="h-[100vh] fixed inset-0 w-[100vw] flex justify-center items-center text-[48px] overflow-hidden">
         <div className="text-container absolute overflow-hidden">
           {" "}
           <p className="leading-[100%] split split-name">Williams</p>
@@ -137,27 +164,33 @@ export default function ZoomTextAnim() {
         </div>
       </div>
 
-      <div className="images-container relative">
-        {pictures.map((pic, idx) => {
-          return (
-            <div
-              className="fixed h-[100vh] w-[100vw] flex justify-center items-center img-container"
-              style={{ zIndex: idx + 4 }}
-            >
-              <img src={pic} className="scale-[0] zoom-images" alt="" />
-            </div>
-          );
-        })}
+      <div className=" relative images-container overflow-hidden h-[100vh] ">
+        <div className=" flex justify-center items-center fixed w-[100vw] h-[100vh] inset-0 overflow-hidden">
+          {pictures.map((pic, idx) => {
+            return (
+              <div
+                className="fixed h-[100vh] w-[100vw] flex justify-center scale-0 items-center img-container"
+                style={{ zIndex: idx + 4 }}
+              >
+                <img
+                  src={pic}
+                  className="zoom-images scale-0 opacity-0"
+                  alt=""
+                />
+              </div>
+            );
+          })}
+        </div>
 
         <div
-          style={{ height: `${innerHeight * 4}px` }}
-          className="w-[100vw]"
+          style={{ height: `${innerHeight * 3}px` }}
+          className="w-[100%]"
         ></div>
         {pictures.map((pic, idx) => {
           return (
             <div
               style={{ height: `${innerHeight * 2.5}px` }}
-              className=" w-[100vw] white-height border-black border"
+              className=" w-[100%] white-height"
             ></div>
           );
         })}
