@@ -116,7 +116,7 @@ export default function ZoomTextAnim() {
           trigger: allHeights[idx],
           scrub: 2,
           end: "bottom bottom",
-          start: "-230% top",
+          start: idx === 0 ? "-120% bottom" : "-30% bottom",
         },
       });
     });
@@ -177,7 +177,7 @@ export default function ZoomTextAnim() {
         {pictures.map((pic, idx) => {
           return (
             <div
-              style={{ height: `${innerHeight * 2}px` }}
+              style={{ height: `${innerHeight * 2.1}px` }}
               className=" w-[100%] white-height"
             ></div>
           );
