@@ -22,3 +22,10 @@
   overflow: hidden;
   vertical-align: bottom;
 }
+
+@media (max-width: 800px) {
+  .zoom-images {
+    height: 500px;
+    width: 500px;
+  }
+}

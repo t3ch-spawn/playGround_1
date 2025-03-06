@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
@@ -13,9 +13,10 @@ import Lenis from "lenis";
 export default function ZoomTextAnim() {
   const loaderTimeline = useRef(null);
   const pictures = [pic_1, pic_2, pic_3, pic_4, pic_5];
+  const { innerHeight, innerWidth } = window;
+  const [scaleValue, setScaleValue] = useState(1.8);
 
   useGSAP(() => {
-    const { innerHeight } = window;
     const lenis = new Lenis({
       duration: 0.8,
     });
@@ -29,7 +30,6 @@ export default function ZoomTextAnim() {
 
     const split = new SplitType(".split", { types: "words,chars" });
 
-    const allImages = document.querySelectorAll(".zoom-images");
     const allTextContainers = document.querySelectorAll(".text-container");
 
     loaderTimeline.current = gsap.timeline();
@@ -98,46 +98,29 @@ export default function ZoomTextAnim() {
         );
     }
 
+    gsap.matchMedia().add("(max-width: 800px)", () => {
+      setScaleValue(2.7);
+    });
+  });
+
+  useGSAP(() => {
+    const allImages = document.querySelectorAll(".zoom-images");
+
     const allHeights = document.querySelectorAll(".white-height");
 
     allImages.forEach((pic, idx) => {
       gsap.to(pic, {
-        scale: 1.7,
+        scale: scaleValue,
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: allHeights[idx],
-
           scrub: 2,
           end: "bottom bottom",
-          start: "-250% top",
+          start: "-230% top",
         },
       });
     });
-
-    // gsap
-    //   .timeline({ scrollTrigger: { trigger: ".images-container" } })
-    //   .to(".img-container", {
-    //     scale: 10,
-    //     ease: "power2.inOut",
-    //     stagger: 2,
-    //   });
-
-    // allContainers.forEach((container) => {
-    //   gsap.to(container.querySelector("img"), {
-    //     scale: 100,
-    //     duration: 10,
-    //     opacity: 0,
-    //     ease: "power2.inOut",
-    //     scrollTrigger: {
-    //       trigger: container,
-    //       end: `+=${innerHeight * 2}px`,
-    //       scrub: 2,
-    //       pin: true,
-    //       markers: true,
-    //     },
-    //   });
-    // });
-  });
+  }, [scaleValue]);
 
   return (
     <section className="">
@@ -150,6 +133,11 @@ export default function ZoomTextAnim() {
     
       </div> */}
 
+      {/* <div>
+        {pictures.map((pic) => (
+          <img className="z-[20000]" src={pic} />
+        ))}
+      </div> */}
       {/* Loader container */}
       <div className="h-[100vh] fixed inset-0 w-[100vw] flex justify-center items-center text-[48px] overflow-hidden">
         <div className="text-container absolute overflow-hidden">
@@ -174,7 +162,7 @@ export default function ZoomTextAnim() {
               >
                 <img
                   src={pic}
-                  className="zoom-images scale-0 opacity-0"
+                  className="zoom-images scale-0 h-[912px] w-[912px]  object-cover opacity-0"
                   alt=""
                 />
               </div>
@@ -182,14 +170,14 @@ export default function ZoomTextAnim() {
           })}
         </div>
 
-        <div
-          style={{ height: `${innerHeight * 3}px` }}
+        {/* <div
+          style={{ height: `${innerHeight}px` }}
           className="w-[100%]"
-        ></div>
+        ></div> */}
         {pictures.map((pic, idx) => {
           return (
             <div
-              style={{ height: `${innerHeight * 2.5}px` }}
+              style={{ height: `${innerHeight * 2}px` }}
               className=" w-[100%] white-height"
             ></div>
           );
