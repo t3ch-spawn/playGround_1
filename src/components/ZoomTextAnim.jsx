@@ -128,8 +128,8 @@ export default function ZoomTextAnim() {
       });
     });
 
-    const revealHome = gsap.timeline().to(".zoom-images", {
-      yPercent: -140,
+    const revealHome = gsap.timeline().to(".img-container", {
+      yPercent: -190,
     });
 
     // Animation to reveal home screen
@@ -139,7 +139,7 @@ export default function ZoomTextAnim() {
       animation: revealHome,
       start: "top bottom",
       end: "top top",
-    //   markers: true,
+      markers: true,
     });
   }, [scaleValue]);
 
