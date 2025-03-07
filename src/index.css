@@ -30,8 +30,8 @@ body.active {
   vertical-align: bottom;
 }
 
-.images-container.active {
-  overflow: visible;
+.img-container.active {
+  overflow: hidden;
 }
 
 @media (max-width: 800px) {

@@ -70,9 +70,8 @@ export default function ZoomTextAnim() {
             ease: "power4.inOut",
             onStart: () => {
               if (i > 0) {
-                const cont = document.querySelector(".images-container");
-                // cont.classList.add("active");
                 const body = document.querySelector("body");
+
                 body.classList.remove("active");
 
                 gsap.timeline().to(
@@ -93,6 +92,12 @@ export default function ZoomTextAnim() {
                     onComplete: () => {
                       gsap.to(".home-screen", {
                         opacity: 1,
+                      });
+
+                      const imgConts =
+                        document.querySelectorAll(".img-container");
+                      imgConts.forEach((cont) => {
+                        cont.classList.add("active");
                       });
                     },
                   },
@@ -129,7 +134,7 @@ export default function ZoomTextAnim() {
     });
 
     const revealHome = gsap.timeline().to(".img-container", {
-      yPercent: -190,
+      yPercent: -100,
     });
 
     // Animation to reveal home screen
@@ -179,7 +184,7 @@ export default function ZoomTextAnim() {
           {pictures.map((pic, idx) => {
             return (
               <div
-                className="fixed h-[100vh] w-[100%] flex justify-center scale-0 items-center img-container"
+                className="fixed h-[100vh] w-[100%] flex justify-center  scale-0 items-center img-container"
                 style={{ zIndex: idx + 40 }}
               >
                 <img
