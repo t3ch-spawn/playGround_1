@@ -53,8 +53,8 @@ export default function ZoomTextAnim() {
             : container.querySelectorAll(".char"),
           {
             y: 0,
-            // duration: 1.7,
-            duration: 0.2,
+            duration: 1.7,
+            // duration: 0.2,
             scale: 1,
             ease: "power2.inOut",
             opacity: 1,
@@ -65,8 +65,8 @@ export default function ZoomTextAnim() {
           container,
           {
             scale: 800,
-            // duration: 3.5,
-            duration: 0.2,
+            duration: 3.5,
+            // duration: 0.2,
             ease: "power4.inOut",
             onStart: () => {
               if (i > 0) {
