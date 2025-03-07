@@ -144,7 +144,7 @@ export default function ZoomTextAnim() {
       animation: revealHome,
       start: "top bottom",
       end: "top top",
-      markers: true,
+    //   markers: true,
     });
   }, [scaleValue]);
 
